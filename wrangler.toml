@@ -1,7 +1,6 @@
 name = "ikigaro-os"
+main = "dist/server/server.js"
 compatibility_date = "2024-01-01"
 compatibility_flags = ["nodejs_compat"]
-main = "dist/server/server.js"
 
-[site]
-bucket = "./dist/client"
+assets = { directory = "./dist/client" }
