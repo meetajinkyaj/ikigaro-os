@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import heroImage from "../assets/ikigaro-hero.jpg";
+import { WaitlistForm } from "@/components/WaitlistForm";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -101,6 +102,21 @@ function Index() {
                   </li>
                 ))}
               </ul>
+            </div>
+
+            <div className="mt-12 border-t border-border pt-8">
+              <p className="font-display text-xs uppercase tracking-[0.3em] text-muted-foreground">
+                Join the Waitlist
+              </p>
+              <h2 className="mt-4 font-display text-2xl font-light tracking-tight sm:text-3xl">
+                Be first through the doors.
+              </h2>
+              <p className="mt-2 max-w-md text-sm text-muted-foreground">
+                Leave your email for early access, opening details, and founding-member invitations.
+              </p>
+              <div className="mt-5 max-w-md">
+                <WaitlistForm />
+              </div>
             </div>
           </main>
 
