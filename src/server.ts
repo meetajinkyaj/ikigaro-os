@@ -1,3 +1,7 @@
+import "./polyfill";
+import { createStart, createMiddleware } from "@tanstack/react-start";
+import { renderErrorPage } from "./lib/error-page";
+
 if (typeof process === 'undefined') {
   (globalThis as any).process = { env: {}, version: '', platform: 'browser' };
 }
