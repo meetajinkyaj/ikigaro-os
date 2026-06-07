@@ -3,7 +3,7 @@ import { z } from "zod";
 
 import { getRuntimeEnv } from "./runtime-env.server";
 
-const DATABASE_ID = "3766ff1100d48048a082000c6b926ed8";
+const DATABASE_ID = "3766ff1100d480cca7d3eac8fbf91d2a";
 const NOTION_API_URL = "https://api.notion.com/v1";
 
 const InputSchema = z.object({
