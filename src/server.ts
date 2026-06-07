@@ -1,3 +1,6 @@
+if (typeof process === 'undefined') {
+  (globalThis as any).process = { env: {}, version: '', platform: 'browser' };
+}
 import "./lib/error-capture";
 
 import { consumeLastCapturedError } from "./lib/error-capture";
