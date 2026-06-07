@@ -1,7 +1,7 @@
 name = "ikigaro-os"
 main = "dist/server/server.js"
 compatibility_date = "2024-01-01"
-compatibility_flags = ["nodejs_compat", "nodejs_als"]
+compatibility_flags = ["nodejs_compat"]
 
 assets = { directory = "./dist/client" }
 
@@ -11,3 +11,8 @@ invocation_logs = true
 
 [vars]
 NODE_ENV = "production"
+
+[define]
+"process.env.NODE_ENV" = '"production"'
+"process.env" = "{}"
+"process" = "{ env: {}, version: '', platform: 'browser' }"
