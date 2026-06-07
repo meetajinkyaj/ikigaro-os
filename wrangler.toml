@@ -1,5 +1,4 @@
 name = "ikigaro-os"
-node_compat = true
 main = "dist/server/server.js"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat"]
