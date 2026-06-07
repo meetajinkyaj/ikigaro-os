@@ -1,9 +1,9 @@
 name = "ikigaro-os"
-main = ".output/server/index.mjs"
+main = "dist/server/server.js"
 compatibility_date = "2025-01-01"
-compatibility_flags = ["nodejs_compat"]
+compatibility_flags = ["nodejs_compat", "nodejs_als"]
 
-assets = { directory = "./.output/public" }
+assets = { directory = "./dist/client" }
 
 [observability.logs]
 enabled = true
