@@ -4,7 +4,7 @@ import { z } from "zod";
 import { getRuntimeEnv } from "./runtime-env.server";
 
 const DATABASE_ID = "3766ff1100d48048a082000c6b926ed8";
-const GATEWAY_URL = "https://connector-gateway.lovable.dev/notion/v1";
+const NOTION_API_URL = "https://api.notion.com/v1";
 
 const InputSchema = z.object({
   email: z.string().trim().email("Please enter a valid email").max(255),
@@ -13,16 +13,15 @@ const InputSchema = z.object({
 export const joinWaitlist = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => InputSchema.parse(data))
   .handler(async ({ data }) => {
-    const LOVABLE_API_KEY = getRuntimeEnv("LOVABLE_API_KEY");
     const NOTION_API_KEY = getRuntimeEnv("NOTION_API_KEY");
-    if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
+
     if (!NOTION_API_KEY) throw new Error("NOTION_API_KEY is not configured");
 
-    const res = await fetch(`${GATEWAY_URL}/pages`, {
+    const res = await fetch(`${NOTION_API_URL}/pages`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
-        "X-Connection-Api-Key": NOTION_API_KEY,
+        Authorization: `Bearer ${NOTION_API_KEY}`,
+        "Notion-Version": "2022-06-28",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -48,6 +47,5 @@ export const joinWaitlist = createServerFn({ method: "POST" })
       console.error("Notion error", res.status, body);
       throw new Error(`Failed to save signup (${res.status})`);
     }
-
     return { ok: true as const };
   });
