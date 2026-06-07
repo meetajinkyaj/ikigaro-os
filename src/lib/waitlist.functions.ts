@@ -34,9 +34,7 @@ export const joinWaitlist = createServerFn({ method: "POST" })
             date: { start: new Date().toISOString() },
           },
           Source: {
-            rich_text: [
-              { type: "text", text: { content: "Launching Soon Page" } },
-            ],
+            select: { name: "Launching Soon Page" },
           },
         },
       }),
