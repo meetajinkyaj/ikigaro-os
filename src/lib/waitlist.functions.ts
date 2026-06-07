@@ -1,6 +1,8 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
+import { getRuntimeEnv } from "./runtime-env.server";
+
 const DATABASE_ID = "3766ff1100d48048a082000c6b926ed8";
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/notion/v1";
 
@@ -11,9 +13,8 @@ const InputSchema = z.object({
 export const joinWaitlist = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => InputSchema.parse(data))
   .handler(async ({ data }) => {
-    const env = (globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env ?? {};
-    const LOVABLE_API_KEY = env.LOVABLE_API_KEY;
-    const NOTION_API_KEY = env.NOTION_API_KEY;
+    const LOVABLE_API_KEY = getRuntimeEnv("LOVABLE_API_KEY");
+    const NOTION_API_KEY = getRuntimeEnv("NOTION_API_KEY");
     if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
     if (!NOTION_API_KEY) throw new Error("NOTION_API_KEY is not configured");
 
