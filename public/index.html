@@ -21,7 +21,7 @@
 <body>
   <div id="__bundler_thumbnail">
     <style>
-      #__bundler_thumbnail { overflow: hidden; }
+      #__bundler_thumbnail { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: #1B1815; z-index: 2147483647; overflow: hidden; opacity: 1; }
       #__bundler_thumbnail .ik-stage { position: relative; width: min(84vmin, 560px); height: min(84vmin, 560px); }
       #__bundler_thumbnail .ik-glow { position: absolute; inset: 6%; border-radius: 50%; background: radial-gradient(circle at 50% 50%, rgba(181,86,45,0.18), rgba(27,24,21,0) 62%); }
       #__bundler_thumbnail .ik-ring { position: absolute; inset: 14%; border-radius: 50%; border: 1px solid rgba(205,113,68,0.40); }
@@ -87,6 +87,7 @@
     
 document.addEventListener('DOMContentLoaded', async function() {
   const loading = document.getElementById('__bundler_loading');
+  var __splashEl = document.getElementById('__bundler_thumbnail');
   function setStatus(msg) { if (loading) loading.textContent = msg; }
 
   const FONT_MIME = /^(font[/]|application[/](x-)?font-|application[/]vnd\.ms-fontobject)/i;
@@ -219,6 +220,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     const doc = new DOMParser().parseFromString(template, 'text/html');
     document.documentElement.replaceWith(doc.documentElement);
     const dead = Array.from(document.scripts);
+    if (__splashEl) { try { document.body.appendChild(__splashEl); } catch (e) {} }
     for (const old of dead) {
       const s = document.createElement('script');
       for (const a of old.attributes) s.setAttribute(a.name, a.value);
@@ -240,6 +242,30 @@ document.addEventListener('DOMContentLoaded', async function() {
     // which fired before we swapped the document. Trigger manually if present.
     if (window.Babel && typeof window.Babel.transformScriptTags === 'function') {
       window.Babel.transformScriptTags();
+    }
+    if (__splashEl) {
+      var __fadeOut = function () {
+        var el = document.getElementById('__bundler_thumbnail');
+        if (!el) return;
+        el.style.pointerEvents = 'none';
+        el.style.transition = 'opacity 450ms ease';
+        el.style.opacity = '0';
+        setTimeout(function () { if (el && el.parentNode) el.parentNode.removeChild(el); }, 520);
+      };
+      var __start = Date.now(), __MIN = 350, __MAX = 6000, __fired = false;
+      var __fire = function () {
+        if (__fired) return; __fired = true;
+        requestAnimationFrame(function () { requestAnimationFrame(__fadeOut); });
+      };
+      try {
+        if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
+          document.fonts.ready.then(
+            function () { setTimeout(__fire, Math.max(0, __MIN - (Date.now() - __start))); },
+            function () { setTimeout(__fire, 500); }
+          );
+        } else { setTimeout(__fire, 500); }
+      } catch (e) { setTimeout(__fire, 500); }
+      setTimeout(__fire, __MAX);
     }
   } catch (err) {
     setStatus('Error unpacking: ' + err.message);
