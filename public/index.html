@@ -20,12 +20,66 @@
 </head>
 <body>
   <div id="__bundler_thumbnail">
-  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
-    <rect width="1200" height="800" fill="#1B1815"></rect>
-    <circle cx="600" cy="400" r="150" fill="none" stroke="#CD7144" stroke-width="6"></circle>
-    <circle cx="600" cy="400" r="16" fill="#CD7144"></circle>
-    <text x="600" y="640" text-anchor="middle" font-family="Georgia, serif" font-size="64" fill="#F1E9DC" letter-spacing="14">IKIGARO</text>
-  </svg>
+    <style>
+      #__bundler_thumbnail { overflow: hidden; }
+      #__bundler_thumbnail .ik-stage { position: relative; width: min(84vmin, 560px); height: min(84vmin, 560px); }
+      #__bundler_thumbnail .ik-glow { position: absolute; inset: 6%; border-radius: 50%; background: radial-gradient(circle at 50% 50%, rgba(181,86,45,0.18), rgba(27,24,21,0) 62%); }
+      #__bundler_thumbnail .ik-ring { position: absolute; inset: 14%; border-radius: 50%; border: 1px solid rgba(205,113,68,0.40); }
+      #__bundler_thumbnail .ik-field { position: absolute; inset: 0; animation: ik-spin 64s linear infinite; }
+      #__bundler_thumbnail .ik-core { position: absolute; top: 50%; left: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: #CD7144; box-shadow: 0 0 20px 5px rgba(205,113,68,0.55); animation: ik-pulse 2.6s ease-in-out infinite; }
+      #__bundler_thumbnail .ik-word { position: absolute; top: 100%; left: 0; right: 0; text-align: center; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(26px, 6.2vmin, 50px); letter-spacing: 0.36em; text-indent: 0.36em; color: #F1E9DC; }
+      #__bundler_thumbnail .ik-dot { position: absolute; top: 50%; left: 50%; border-radius: 50%; opacity: 0; will-change: transform, opacity; animation-name: ik-arrive; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+      @keyframes ik-arrive {
+        0%   { opacity: 0; transform: translate(-50%,-50%) rotate(var(--a)) translateX(var(--r0)) scale(0.5); }
+        18%  { opacity: var(--op); }
+        76%  { opacity: var(--op); }
+        100% { opacity: 0; transform: translate(-50%,-50%) rotate(var(--a)) translateX(var(--r1)) scale(1); }
+      }
+      @keyframes ik-pulse { 0%, 100% { transform: scale(1); opacity: 0.85; } 50% { transform: scale(1.35); opacity: 1; } }
+      @keyframes ik-spin { to { transform: rotate(360deg); } }
+      @media (prefers-reduced-motion: reduce) {
+        #__bundler_thumbnail .ik-field, #__bundler_thumbnail .ik-core { animation: none; }
+        #__bundler_thumbnail .ik-dot { animation: none; opacity: 0.5; transform: translate(-50%,-50%) rotate(var(--a)) translateX(var(--rm)); }
+      }
+    </style>
+    <div class="ik-stage">
+      <div class="ik-glow"></div>
+      <div class="ik-ring"></div>
+      <div class="ik-field" id="__ik_field"></div>
+      <div class="ik-core"></div>
+      <div class="ik-word">IKIGARO</div>
+    </div>
+    <script>
+      (function () {
+        try {
+          var field = document.getElementById('__ik_field');
+          if (!field) return;
+          var vmin = Math.min(window.innerWidth || 480, window.innerHeight || 480);
+          var half = Math.min(0.84 * vmin, 560) / 2;
+          var colors = ['#CD7144', '#B5562D', '#8F5A3C', 'rgba(241,233,220,0.70)', 'rgba(241,233,220,0.40)'];
+          var N = 60, frag = document.createDocumentFragment();
+          for (var i = 0; i < N; i++) {
+            var d = document.createElement('div');
+            d.className = 'ik-dot';
+            var r0 = half * (0.82 + Math.random() * 0.16);
+            var r1 = half * (0.16 + Math.random() * 0.30);
+            var sz = 1.5 + Math.random() * 3;
+            d.style.width = sz.toFixed(1) + 'px';
+            d.style.height = sz.toFixed(1) + 'px';
+            d.style.background = colors[(Math.random() * colors.length) | 0];
+            d.style.setProperty('--a', (Math.random() * 360).toFixed(1) + 'deg');
+            d.style.setProperty('--r0', r0.toFixed(1) + 'px');
+            d.style.setProperty('--r1', r1.toFixed(1) + 'px');
+            d.style.setProperty('--rm', ((r0 + r1) / 2).toFixed(1) + 'px');
+            d.style.setProperty('--op', (0.35 + Math.random() * 0.55).toFixed(2));
+            d.style.animationDuration = (3.4 + Math.random() * 3.8).toFixed(2) + 's';
+            d.style.animationDelay = (-Math.random() * 7).toFixed(2) + 's';
+            frag.appendChild(d);
+          }
+          field.appendChild(frag);
+        } catch (e) {}
+      })();
+    </script>
 </div>
   <div id="__bundler_loading">Unpacking...</div>
 
