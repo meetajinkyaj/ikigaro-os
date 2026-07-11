@@ -1,9 +1,12 @@
 name = "ikigaro-os"
-main = "dist/server/server.js"
+main = "worker.js"
 compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat", "nodejs_als"]
 
-assets = { directory = "./dist/client" }
+# Serve the self-contained landing page and its assets from ./public.
+# The Worker (worker.js) handles POST /api/waitlist; everything else is
+# served straight from these static assets.
+assets = { directory = "./public", binding = "ASSETS" }
 
 [observability.logs]
 enabled = true
