@@ -255,7 +255,7 @@ document.addEventListener('DOMContentLoaded', async function() {
       var __start = Date.now(), __MIN = 350, __MAX = 6000, __fired = false;
       var __fire = function () {
         if (__fired) return; __fired = true;
-        requestAnimationFrame(function () { requestAnimationFrame(__fadeOut); });
+        setTimeout(__fadeOut, 50);
       };
       try {
         if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
