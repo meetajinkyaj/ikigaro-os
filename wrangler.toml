@@ -4,9 +4,11 @@ compatibility_date = "2025-01-01"
 compatibility_flags = ["nodejs_compat", "nodejs_als"]
 
 # Serve the self-contained landing page and its assets from ./public.
-# The Worker (worker.js) handles POST /api/waitlist; everything else is
-# served straight from these static assets.
-assets = { directory = "./public", binding = "ASSETS" }
+# The Worker (worker.js) handles POST /api/waitlist and injects the legal
+# footer into the landing page; everything else is served straight from these
+# static assets. run_worker_first lets the Worker intercept every request
+# (it already delegates non-API requests to env.ASSETS) so it can rewrite "/".
+assets = { directory = "./public", binding = "ASSETS", run_worker_first = true }
 
 [observability.logs]
 enabled = true

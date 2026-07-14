@@ -1,0 +1,170 @@
+/* Ikigaro legal pages (/privacy, /terms) — self-contained styling that
+   matches the brand: cream ground, charcoal text, terracotta accent, and the
+   three brand voices (Cormorant Garamond, Marcellus, Hanken Grotesk). */
+
+:root {
+  --bg: #f1e9dc;          /* Onsen Linen */
+  --surface: #fbf7f0;
+  --fg: #1b1815;          /* Obsidian Stone */
+  --muted: #5c534a;
+  --subtle: #8a7e6f;
+  --accent: #b5562d;      /* Golden Hour terracotta */
+  --accent-hover: #8f3f1d;
+  --tan: #c9b79c;
+  --border: rgba(27, 24, 21, 0.14);
+
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-label: "Marcellus", Georgia, serif;
+  --font-body: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* --- Wordmark: lowercase "ikigaro" with a terracotta tittle on the i --- */
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: var(--fg);
+  display: inline-block;
+}
+.wordmark .i-wrap { position: relative; display: inline-block; }
+.wordmark .tittle {
+  position: absolute;
+  left: 50%;
+  top: 0.06em;
+  width: 0.13em;
+  height: 0.13em;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateX(-50%);
+}
+
+/* --- Header --- */
+.site-header {
+  border-bottom: 1px solid var(--border);
+}
+.site-header .inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.site-header .wordmark { font-size: 26px; }
+.site-header nav { display: flex; gap: 20px; }
+.site-header nav a {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 11px;
+  color: var(--muted);
+}
+.site-header nav a:hover { color: var(--fg); text-decoration: none; }
+
+/* --- Main --- */
+main {
+  flex: 1;
+  max-width: 760px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 56px 24px;
+}
+.eyebrow {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 12px;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 2.6rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.meta { color: var(--muted); font-size: 0.9rem; margin-top: 8px; }
+
+.prose { margin-top: 40px; }
+.prose > * + * { margin-top: 20px; }
+.prose h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 1.25;
+  margin-top: 40px;
+}
+.prose h3 {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  margin-top: 20px;
+}
+.prose p, .prose li { font-size: 0.95rem; }
+.prose ul { padding-left: 22px; }
+.prose li { margin-top: 8px; }
+.prose strong { font-weight: 600; color: var(--fg); }
+
+.back { margin-top: 48px; font-size: 0.9rem; }
+
+/* --- Footer --- */
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 24px;
+}
+.site-footer .inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  text-align: center;
+}
+.site-footer .pillars {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 11px;
+  color: var(--muted);
+}
+.site-footer .jp {
+  font-family: var(--font-label);
+  letter-spacing: 0.18em;
+  font-size: 11px;
+  color: var(--subtle);
+}
+.site-footer nav { display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; }
+.site-footer nav a, .site-footer .email {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--muted);
+}
+.site-footer .copy { font-size: 11px; color: var(--subtle); }
+
+@media (max-width: 600px) {
+  h1 { font-size: 2.1rem; }
+  main { padding: 40px 20px; }
+}
