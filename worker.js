@@ -32,6 +32,7 @@ const LEGAL_FOOTER = `
 <footer style="background:#1B1815;border-top:1px solid rgba(241,233,220,0.14);padding:40px 24px;text-align:center;font-family:'Hanken Grotesk',-apple-system,BlinkMacSystemFont,sans-serif;color:#C9B79C;">
   <div style="max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px;align-items:center;">
     <p style="font-family:'Marcellus',Georgia,serif;text-transform:uppercase;letter-spacing:0.28em;font-size:11px;color:#C9B79C;margin:0;">Performance &middot; Recovery &middot; Longevity</p>
+    <p style="font-size:14px;color:#C9B79C;margin:0;max-width:520px;">The Ikigaro app is live in private beta &mdash; build your baseline before the Space opens. <a href="https://app.ikigaro.com" style="color:#CD7144;text-decoration:none;">app.ikigaro.com&nbsp;&rarr;</a></p>
     <nav style="display:flex;gap:18px;flex-wrap:wrap;justify-content:center;font-size:13px;">
       <a href="/privacy" style="color:#CD7144;text-decoration:none;">Privacy Policy</a>
       <a href="/terms" style="color:#CD7144;text-decoration:none;">Terms of Service</a>
